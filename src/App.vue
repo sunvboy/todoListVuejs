@@ -4,10 +4,7 @@
     <b-container>
       <!-- TITLE : START -->
       <CTitle></CTitle>
-      <CTitle></CTitle>
-
       <!-- TITLE : END -->
-
       <b-row>
         <!-- CONTROL (SEARCH + SORT + ADD) : START -->
         <b-col lg="6" cols="12">
