@@ -1,8 +1,11 @@
 <template>
+
   <div id="app">
     <b-container>
       <!-- TITLE : START -->
       <CTitle></CTitle>
+      <CTitle></CTitle>
+
       <!-- TITLE : END -->
 
       <b-row>
