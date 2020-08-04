@@ -21,14 +21,9 @@
         </b-col>
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
-        <!-- FORM : START -->
-        <b-col lg="6" cols="12">
-          <!-- ADD : START -->
-          <CAdd></CAdd>
-          <!-- ADD : END -->
-          <CForm></CForm>
-        </b-col>
-        <!-- FORM : END -->
+        
+        <CForm v-on:handleAddApp="handleAddApp" v-bind:isShowform="isShowform"></CForm>
+
       </b-row>
 
       <!-- LIST : START -->
@@ -42,7 +37,6 @@ import TodoListTable from "./components/TodoListTable";
 import CTitle from "./components/c-title";
 import CSort from "./components/c-sort";
 import CSearch from "./components/c-search";
-import CAdd from "./components/c-add";
 import CForm from "./components/c-from";
 import dataTask from "./data/task";
 
@@ -53,14 +47,20 @@ export default {
     CTitle,
     CSort,
     CSearch,
-    CAdd,
     CForm,
   },
   data() {
     return {
       listTask: dataTask,
+      isShowform: false
     };
   },
+  methods:{
+    handleAddApp(){
+      //console.log('handleAddApp app.vue');
+      this.isShowform = !this.isShowform
+    }
+  }
 };
 </script>
 

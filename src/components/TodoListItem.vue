@@ -21,7 +21,7 @@ export default {
     index: { type: Number },
   },
   created(){ 
-      console.log(mapLevel);
+      //console.log(mapLevel);
 
   }
   ,
