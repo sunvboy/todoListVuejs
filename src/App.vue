@@ -143,9 +143,19 @@ export default {
        this.orderDir = data.orderDir;
     },
     handleDelete(data){
-      this.isPopup = !this.isPopup;
-      this.$emit('handleDelete',data);
-      console.log(data);
+      //this.isPopup = !this.isPopup;
+      //cách 1
+      this.listTask = this.listTask.filter(item => item.id !== data);
+      //cách 2
+      // var indexDelete = 0;
+      // for(var i = 0; i < this.listTask.length; i++){
+      //     if(this.listTask[i].id === data){
+      //         indexDelete  = i;
+      //         break;
+      //     }
+
+      // }
+      // this.listTask.splice(indexDelete,1);
 
     }
     ,handleClose(){
