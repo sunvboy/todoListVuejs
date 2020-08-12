@@ -20,7 +20,7 @@ export default {
   methods:{
     onClickAddTask(){
       //console.log('onClickAddTask c-add');
-      this.$emit('handleAddForm');
+      this.$emit('handleToogleForm');
 
     }
   }

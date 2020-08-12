@@ -30,7 +30,7 @@
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
         
-        <CForm v-on:handleAddApp="handleAddApp" v-bind:isShowform="isShowform"></CForm>
+        <CForm v-on:handleToogleForm="handleToogleForm" v-on:handleAddNewTask="handleAddNewTask" v-bind:isShowform="isShowform"></CForm>
 
       </b-row>
 
@@ -105,7 +105,9 @@ export default {
     }
   },
   methods:{
-
+    handleAddNewTask(data){
+      this.listTask.push(data);
+    },
     // compareTitle(a,b){
     //   // a b c d e f
     //   let numberSort = this.orderDir === 'asc' ? -1 : 1;
@@ -128,8 +130,7 @@ export default {
       return 0;
 
     },
-    handleAddApp(){
-      //console.log('handleAddApp app.vue');
+    handleToogleForm(){
       this.isShowform = !this.isShowform
     },
     handleSearch(data){
