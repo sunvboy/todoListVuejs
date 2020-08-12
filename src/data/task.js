@@ -2,26 +2,26 @@ import { v4 as uuidv4 } from 'uuid';
 export default [
     {
       id: uuidv4(),
-      title: "Bài viết 1",
+      title: "dantri.com",
       level: 0,
     },
     {
       id: uuidv4(),
-      title: "Bài viết 2",
+      title: "24h.com.vn",
       level: 1,
     },
     {
       id: uuidv4(),
-      title: "Bài viết 3",
+      title: "baomoi.com",
       level: 2,
     },
     {
       id: uuidv4(),
-      title: "Bài viết 4",
+      title: "BTC News",
       level: 1,
     },{
         id: uuidv4(),
-        title: "Bài viết 5",
+        title: "VNEXPRESS",
         level: 1,
     },
   ]

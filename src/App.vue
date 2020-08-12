@@ -10,11 +10,19 @@
         <b-col lg="6" cols="12">
           <b-row>
             <!-- SORT : START -->
-            <CSort></CSort>
+            <CSort
+            v-bind:orderTitle="orderTitle"
+            v-bind:orderDir="orderDir"
+            v-on:handleSort = "handleSort"
+            ></CSort>
             <!-- SORT : END -->
 
             <!-- SEARCH : START -->
-            <CSearch></CSearch>
+            <CSearch 
+            v-on:handleSearch = "handleSearch"
+            v-bind:strSearch="strSearch"
+            
+            ></CSearch>
 
             <!-- SEARCH : END -->
           </b-row>
@@ -27,8 +35,12 @@
       </b-row>
 
       <!-- LIST : START -->
-      <TodoListTable v-bind:listTask="listTask"></TodoListTable>
+      <TodoListTable v-bind:listTask="listTaskSort" v-on:handleDelete="handleDelete"></TodoListTable>
     </b-container>
+
+    <CPopup v-bind:isPopup="isPopup" v-on:handleClose="handleClose"></CPopup>
+
+
   </div>
 </template>
 
@@ -39,6 +51,7 @@ import CSort from "./components/c-sort";
 import CSearch from "./components/c-search";
 import CForm from "./components/c-from";
 import dataTask from "./data/task";
+import CPopup from "./components/c-popup";
 
 export default {
   name: "app",
@@ -48,17 +61,96 @@ export default {
     CSort,
     CSearch,
     CForm,
+    CPopup,
   },
   data() {
     return {
       listTask: dataTask,
-      isShowform: false
+      isShowform: false,
+      isPopup: false,
+      strSearch: '',
+      orderTitle: 'title',
+      orderDir: 'asc',
     };
   },
+  computed:{
+    listTaskSearch(){
+      let strSearch = this.strSearch.toLowerCase();
+      var newArray = [];
+      this.listTask.forEach(function(item,index){
+        //search dùng inlucdes
+        if(item.title.toLowerCase().includes( strSearch ) === true){
+          newArray.push(item);
+
+        }
+      })
+      //ngoài ra sử dụng filter để làm
+
+      return newArray;
+    },
+    listTaskSort(){
+      //lưu ý cần clone sang 1 mảng mới
+      var listTask = [...this.listTaskSearch];
+      listTask.sort(this.compareSort);
+      // if(this.orderTitle === 'title'){
+      //   listTask.sort(this.orderTitle);
+
+      // }else if(this.orderTitle === 'level'){
+      //   listTask.sort(this.compareLevel);
+      // }
+      //console.log(this.listTask);
+      //console.log(listTask);
+
+      return listTask;
+    }
+  },
   methods:{
+
+    // compareTitle(a,b){
+    //   // a b c d e f
+    //   let numberSort = this.orderDir === 'asc' ? -1 : 1;
+    //   if(a.title < b.title) return numberSort;
+    //   else if(a.title > b.title)  return numberSort*(-1);
+    //   return 0;
+
+    // },
+    // compareLevel(a,b){
+    //   let numberSort = this.orderDir === 'asc' ? -1 : 1;
+    //   if(a.level < b.level) return numberSort;
+    //   else if(a.level > b.level)  return numberSort*(-1);
+    //   return 0;
+    // },
+    compareSort(a,b){
+      let numberSort = this.orderDir === 'asc' ? -1 : 1;
+      //console.log([this.orderTitle]);
+      if(a[this.orderTitle] < b[this.orderTitle]) return numberSort;
+      else if(a[this.orderTitle] > b[this.orderTitle])  return numberSort*(-1);
+      return 0;
+
+    },
     handleAddApp(){
       //console.log('handleAddApp app.vue');
       this.isShowform = !this.isShowform
+    },
+    handleSearch(data){
+      //console.log('handleSearch ở App',data);
+      this.strSearch = data;
+
+    },
+    handleSort(data){
+      //console.log('handleSort ở App',data);
+       this.orderTitle = data.orderTitle;
+       this.orderDir = data.orderDir;
+    },
+    handleDelete(data){
+      this.isPopup = !this.isPopup;
+      this.$emit('handleDelete',data);
+      console.log(data);
+
+    }
+    ,handleClose(){
+      
+      this.isPopup = !this.isPopup;
     }
   }
 };
@@ -94,5 +186,58 @@ span.badge-medium {
   .add-task {
     margin-top: 50px;
   }
+}
+.overlay.active {
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 9999;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
 }
 </style>

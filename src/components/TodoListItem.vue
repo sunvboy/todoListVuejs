@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr v-if="task.length !== 0">
     <td class="text-center">{{index+1}}</td>
     <td>{{task.title}}</td>
     <td class="text-center">
@@ -7,9 +7,10 @@
     </td>
     <td>
       <button type="button" class="btn btn-warning">Edit</button>
-      <button type="button" class="btn btn-danger">Delete</button>
+      <button type="button" class="btn btn-danger" v-on:click="handleDelete(task.id)">Delete</button>
     </td>
   </tr>
+  
 </template>
 
 <script>
@@ -58,6 +59,18 @@ export default {
         mapLevel: mapLevel
     };
   },
+  methods:{
+    handleDelete(data){
+      
+
+      this.$emit('handleDelete',data);
+      // if(confirm('Bạn có muốn xóa bài viết: '+this.task.name+'  không?')){
+      //   this.$emit('handleDelete',data);
+
+      // }
+
+    }
+  }
 };
 </script>
 

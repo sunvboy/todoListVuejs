@@ -2,7 +2,7 @@
   <!-- FORM : START -->
         <b-col lg="6" cols="12">
           <!-- ADD : START -->
-          <CAdd v-on:handleAddForm="handleAddForm"></CAdd>
+          <CAdd v-bind:isShowform="isShowform" v-on:handleAddForm="handleAddForm"></CAdd>
           <!-- ADD : END -->
           <form  v-if="isShowform" action method="POST" class="form-inline justify-content-between">
             <div class="form-group">
@@ -19,7 +19,7 @@
             </div>
 
             <button type="button" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary">Cancel</button>
+            <button type="button" class="btn btn-secondary" v-on:click="handleCancel">Cancel</button>
           </form>
         </b-col>
   <!-- FORM : END -->
@@ -43,7 +43,12 @@ export default {
     handleAddForm(){
       //console.log('handleAddForm c-form');
       this.$emit("handleAddApp");
+    },
+    handleCancel(){
+      this.$emit("handleAddApp");
+
     }
+
   }
 };
 </script>
