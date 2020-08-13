@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      listTask: dataTask,
+      listTask: null,
       isShowform: false,
       isPopup: false,
       strSearch: '',
@@ -80,7 +80,13 @@ export default {
       orderDir: 'asc',
       taskSelected: null
     };
-  },
+  },watch:{
+    listTask: function(newlistTask){
+      var taskString = JSON.stringify(newlistTask);
+      localStorage.setItem('listTaskLocal',taskString);
+    }
+  }
+  ,
   computed:{
     listTaskSearch(){
       let strSearch = this.strSearch.toLowerCase();
@@ -111,6 +117,20 @@ export default {
 
       return listTask;
     }
+  }
+  ,
+  created(){
+      // Lay listask từ localStorage
+
+      let listTaskLocal = localStorage.getItem('listTaskLocal');
+      console.log(listTaskLocal);
+
+      if(listTaskLocal !== null){
+          this.listTask = JSON.parse(listTaskLocal);
+      }else{
+        this.listTask = [];
+      }
+
   },
   methods:{
     handleUpdateTask(data){
