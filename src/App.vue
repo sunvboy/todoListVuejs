@@ -30,12 +30,18 @@
         <!-- CONTROL (SEARCH + SORT + ADD) : END -->
 
         
-        <CForm v-on:handleToogleForm="handleToogleForm" v-on:handleAddNewTask="handleAddNewTask" v-bind:isShowform="isShowform"></CForm>
+        <CForm 
+        v-on:handleToogleForm="handleToogleForm" 
+        v-on:handleAddNewTask="handleAddNewTask" 
+        v-bind:isShowform="isShowform"
+        v-bind:taskSelected="taskSelected"
+        
+        ></CForm>
 
       </b-row>
 
       <!-- LIST : START -->
-      <TodoListTable v-bind:listTask="listTaskSort" v-on:handleDelete="handleDelete"></TodoListTable>
+      <TodoListTable v-bind:listTask="listTaskSort" v-on:handleDelete="handleDelete" v-on:handleEdit="handleEdit"></TodoListTable>
     </b-container>
 
     <CPopup v-bind:isPopup="isPopup" v-on:handleClose="handleClose"></CPopup>
@@ -71,6 +77,7 @@ export default {
       strSearch: '',
       orderTitle: 'title',
       orderDir: 'asc',
+      taskSelected: null
     };
   },
   computed:{
@@ -132,6 +139,8 @@ export default {
     },
     handleToogleForm(){
       this.isShowform = !this.isShowform
+      if(!this.isShowform) this.taskSelected = null;
+
     },
     handleSearch(data){
       //console.log('handleSearch ở App',data);
@@ -162,6 +171,14 @@ export default {
     ,handleClose(){
       
       this.isPopup = !this.isPopup;
+    },
+    handleEdit(data){
+      
+      this.$emit('handleEdit',data);
+      this.taskSelected = data;
+      this.isShowform = true;
+      //console.log(data.id);
+
     }
   }
 };

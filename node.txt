@@ -1,0 +1,44 @@
+pull code git
+git fetch
+git checkout origin/master -- path/to/file
+t?o file node_modules
+npm install
+chú ý:
+v-bind: ?? truy?n vào
+Sau ?ó ? component con s? dùng props ?? l?y
+
+
+truy?n d? li?u t? th?ng con sang th?ng cha
+? th?ng con: 
+- T?o methods": tên v-on:click="? class"
+
+Ví d?: 
+<button v-if="!isShowform" v-on:click="handleToogleForm" type="button" class="btn btn-info btn-block">Add Task</button>
+<script>
+methods:{
+    handleToogleForm(data){
+      //console.log('onClickAddTask c-add');
+      this.$emit('handleToogleForm',data);
+
+    }
+}
+
+</script>
+
+? th?ng cha:
+v-on:handleToogleForm = "handleToogleForm"
+Ví d?:    
+       
+<CAdd v-bind:isShowform="isShowform" v-on:handleToogleForm="handleToogleForm"></CAdd>
+<script>
+methods:{
+    handleToogleForm(data){
+      
+      console.log(data)
+
+    }
+}
+
+</script>
+
+

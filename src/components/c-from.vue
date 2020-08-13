@@ -36,7 +36,8 @@ export default {
     CAdd
   },
   props: {
-    isShowform: {Type: Boolean, default: false}
+    isShowform: {Type: Boolean, default: false},
+    taskSelected:{type:Object, default:null}
   },
   data() {
     return {
@@ -44,6 +45,27 @@ export default {
         taskLevel:0
 
     };
+  },
+  watch:{
+      taskSelected: function(newData,oldData) {
+        if(newData !== null){
+          //thực hiện gán dữ liệu
+          this.taskTitle = newData.title;
+          this.taskLevel = newData.level;
+        }
+
+      }
+  },
+  beforeUpdate(){
+    // if(this.taskSelected !== null){
+    //   //thực hiện gán dữ liệu
+
+    //   this.taskTitle = this.taskSelected.title;
+    //   this.taskLevel = this.taskSelected.level;
+
+    // }
+
+
   },
   methods:{
     handleAddNewTask(){

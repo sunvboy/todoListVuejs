@@ -21,6 +21,7 @@
            v-bind:index="index" 
            v-bind:task="task"
            v-on:handleDelete = "handleDelete"
+           v-on:handleEdit = "handleEdit"
            
            
            ></TodoListItem>
@@ -55,6 +56,11 @@ export default {
     handleDelete(data){
       
       this.$emit('handleDelete',data);
+
+    },
+    handleEdit(data){
+      
+      this.$emit('handleEdit',data);
 
     }
   }

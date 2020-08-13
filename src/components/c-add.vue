@@ -1,7 +1,7 @@
 <template>
   <div class="form-group add-task">
-    <button v-if="!isShowform" v-on:click="onClickAddTask" type="button" class="btn btn-info btn-block">Add Task</button>
-    <button v-else v-on:click="onClickAddTask" type="button" class="btn btn-primary btn-block">Close Task</button>
+    <button v-if="!isShowform" v-on:click="handleToogleForm" type="button" class="btn btn-info btn-block">Add Task</button>
+    <button v-else v-on:click="handleToogleForm" type="button" class="btn btn-primary btn-block">Close Task</button>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     };
   },
   methods:{
-    onClickAddTask(){
+    handleToogleForm(){
       //console.log('onClickAddTask c-add');
       this.$emit('handleToogleForm');
 

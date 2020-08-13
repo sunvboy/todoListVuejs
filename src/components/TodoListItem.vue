@@ -6,7 +6,7 @@
       <span class="badge " v-bind:class="getClassNameLevel">{{getNameLevel}}</span>
     </td>
     <td>
-      <button type="button" class="btn btn-warning">Edit</button>
+      <button type="button" class="btn btn-warning" v-on:click="handleEdit()">Edit</button>
       <button type="button" class="btn btn-danger" v-on:click="handleDelete(task.id)">Delete</button>
     </td>
   </tr>
@@ -68,6 +68,10 @@ export default {
       //   this.$emit('handleDelete',data);
 
       // }
+
+    },
+    handleEdit(){
+      this.$emit('handleEdit',this.task);
 
     }
   }
