@@ -3,16 +3,16 @@ git fetch
 git checkout origin/master -- path/to/file
 t?o file node_modules
 npm install
-ch� �:
-v-bind: ?? truy?n v�o
-Sau ?� ? component con s? d�ng props ?? l?y
+ch� �:
+v-bind: ?? truy?n v�o
+Sau ?� ? component con s? d�ng props ?? l?y
 
 
-truy?n d? li?u t? th?ng con sang th?ng cha
+truyền dữ liệu từ thằng con sang thằng cha 
 ? th?ng con: 
-- T?o methods": t�n v-on:click="? class"
+- Tạo methods": t�n v-on:click="? class"
 
-V� d?: 
+Ví dụ: 
 <button v-if="!isShowform" v-on:click="handleToogleForm" type="button" class="btn btn-info btn-block">Add Task</button>
 <script>
 methods:{
@@ -27,7 +27,7 @@ methods:{
 
 ? th?ng cha:
 v-on:handleToogleForm = "handleToogleForm"
-V� d?:    
+Ví dụ:    
        
 <CAdd v-bind:isShowform="isShowform" v-on:handleToogleForm="handleToogleForm"></CAdd>
 <script>
@@ -40,5 +40,20 @@ methods:{
 }
 
 </script>
+
+* sử dụng hàm "splice": array.splice('vị trí object','số lượng object','Giá trị object mới')
+Ví du: var arr = [
+  {id: 1,value:'quyền 1'},{id: 2,value:'quyền 2'},{id: 3,value:'quyền 3'}
+]
+
+arr.splice(0,1,{id: 1,value:'quyền sửa'});
+
+==> tạo ra 1 array mới là arr = [
+  {id: 1,value:'quyền sửa'},{id: 2,value:'quyền 2'},{id: 3,value:'quyền 3'}
+]
+*Tìm index sử dụng: findIndex
+Ví dụ: let index = "tên array".findIndex(item => item.id === data.id);
+
+
 
 

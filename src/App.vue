@@ -31,6 +31,7 @@
 
         
         <CForm 
+        v-on:handleUpdateTask="handleUpdateTask"
         v-on:handleToogleForm="handleToogleForm" 
         v-on:handleAddNewTask="handleAddNewTask" 
         v-bind:isShowform="isShowform"
@@ -112,6 +113,18 @@ export default {
     }
   },
   methods:{
+    handleUpdateTask(data){
+
+      //console.log('handleUpdateTask',data);
+      //tìm index của id gửi vào
+      let index = this.listTask.findIndex(item => item.id === data.id);
+      if(index !== -1){
+        this.listTask.splice(index, 1 , data);
+        this.handleToogleForm();
+      }
+      
+
+    },
     handleAddNewTask(data){
       this.listTask.push(data);
     },

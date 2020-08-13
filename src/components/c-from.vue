@@ -18,7 +18,8 @@
               </select>
             </div>
 
-            <button type="button" class="btn btn-primary" v-on:click="handleAddNewTask">Submit</button>
+            <button  v-if="this.taskSelected === null" type="button" class="btn btn-primary" v-on:click="handleAddNewTask">Submit</button>
+            <button  v-else type="button" class="btn btn-primary" v-on:click="handleUpdateTask">Update</button>
             <button type="button" class="btn btn-secondary" v-on:click="handleCancel">Cancel</button>
           </form>
         </b-col>
@@ -68,11 +69,20 @@ export default {
 
   },
   methods:{
+    handleUpdateTask(){
+      var data = { 
+        id:this.taskSelected.id, 
+        title:this.taskTitle,
+        level: parseInt(this.taskLevel)
+      }
+      this.$emit('handleUpdateTask',data);
+      this.handleResetData();
+    },
     handleAddNewTask(){
       let data = {
         id: uuidv4(),
         title: this.taskTitle,
-        level: this.taskLevel
+        level: parseInt(this.taskLevel)
       }
       this.$emit("handleAddNewTask",data);
       this.handleCancel();
